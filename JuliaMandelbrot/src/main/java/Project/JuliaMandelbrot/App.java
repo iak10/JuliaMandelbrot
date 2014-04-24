@@ -1,13 +1,13 @@
 package Project.JuliaMandelbrot;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
-}
+class App {
+	public static void main(String args[]) 
+	{ 
+		 ApplicationM mandelbrot = (new ApplicationM()); // Start application
+		 ApplicationJ julia = (new ApplicationJ(mandelbrot)); 
+		 ApplicationJOrbit juliaOrbit = (new ApplicationJOrbit(mandelbrot,julia));
+		 mandelbrot.heresJulia(julia);
+	} 
+}  
+
+
