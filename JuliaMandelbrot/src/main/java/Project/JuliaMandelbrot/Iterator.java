@@ -1,18 +1,36 @@
 package Project.JuliaMandelbrot;
-import java.awt.Color;
 
+import java.awt.Color;
+/**
+ */
 public class Iterator {
 	int max;
 	Color[] colours;
 	int[] cutoffs;
 
+	/**
+	 * Initialises the cutoff points for the 
+	 */
 	public Iterator(int maxIterations, Color[] newColours, int[] newCutoffs) {
 		max = maxIterations;
 		colours = newColours;
 		cutoffs = newCutoffs;
-
+		if(!validate())
+		{
+			throw new RuntimeException("Cutoffs or colours invalid");
+		}
 	}
 
+	/**
+	 * represents 2 complex numbers with two pairs of a real number and imaginary number
+	 * Carries out the iteration of Z = Z^2+C until Z is at a distance greater than or equal to 2 from the origin
+	 * or the number of iterations exceeds maxIterations, returns number of iterations carried out.
+	 * @Param reC - real component of C
+	 * @Param imC - imaginary component of C
+	 * @Param reZ - real component of Z
+	 * @param imZ - imaginary component of Z
+	 * @Param maxIterations - number of iterations the method will stop iterating at
+	 */
 	public int juliaIteration(double reC, double imC, double reZ, double imZ, int maxIterations) {
 		double temp = 0;
 		int iterations = 0;
@@ -25,6 +43,14 @@ public class Iterator {
 		return iterations;
 	}
 
+	/**
+	 * Selects and returns a colour according to the number of iterations returned from juliaIteration.
+	 * The colour will be used to plot the pixel which represents the point.
+	 * @Param reC - real component of C
+	 * @Param imC - imaginary component of C
+	 * @Param reZ - real component of Z
+	 * @param imZ - imaginary component of Z
+	 */
 	public Color colourPicker(double reC, double imC, double reZ, double imZ)
 	{
 		Color currentColour;
@@ -42,6 +68,23 @@ public class Iterator {
 			currentColour = colours[i];
 		}
 		return currentColour;
+	}
+	
+	public boolean validate()
+	{
+		if(colours.length == 0 || cutoffs.length == 0 || cutoffs[0] < 0 )
+		{
+			return false; 			 
+		}
+		for(int i = 1; i < cutoffs.length; i++ )
+		{
+			if(cutoffs[i] <= cutoffs[i-1])
+			{
+				return false; 
+			}
+		}
+		return true;
+		
 	}
 
 }
