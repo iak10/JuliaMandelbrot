@@ -15,9 +15,9 @@ public class Iterator {
 		max = maxIterations;
 		colours = newColours;
 		cutoffs = newCutoffs;
-		if(!validate())
+		if(!validate(cutoffs, colours))
 		{
-			throw new RuntimeException("Cutoffs or colours invalid");
+			throw new RuntimeException("Cutoffs or colours invali  d");
 		}
 	}
 
@@ -34,7 +34,7 @@ public class Iterator {
 	public int juliaIteration(double reC, double imC, double reZ, double imZ, int maxIterations) {
 		double temp = 0;
 		int iterations = 0;
-		while (reZ * reZ + imZ * imZ < 4 && iterations <= maxIterations) {
+		while (reZ * reZ + imZ * imZ <= 4 && iterations <= maxIterations) {
 			temp = (reZ * reZ) - (imZ * imZ) + reC;
 			imZ = (2 * reZ * imZ) + imC;
 			reZ = temp;
@@ -70,7 +70,7 @@ public class Iterator {
 		return currentColour;
 	}
 	
-	public boolean validate()
+	public boolean validate(int[] cutoffs, Color[] colours)
 	{
 		if(colours.length == 0 || cutoffs.length == 0 || cutoffs[0] < 0 )
 		{
