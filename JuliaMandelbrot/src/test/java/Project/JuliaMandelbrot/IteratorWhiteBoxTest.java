@@ -20,11 +20,16 @@ public class IteratorWhiteBoxTest {
 	
 
 	/**
-	 * Tests the return of the correct colour, tests first condition in while loop 
-	 * and else clause in colourPicker if-else statement
+	 * Tests the return of the correct colour, (other 
+	 * than black), which tests the 1st condition
+	 * in while loop in the JuliaIteration method, and
+	 * the code within this while-loop, and the else clause 
+	 * in the colourPicker method's if-else statement. Most of the 
+	 * test values for Z_0 do not result in the number of iterations
+	 * being exactly equal to a cut--ff value.
 	 */
 	@Test
-	public void colourTest()
+	public void cutoffTest1()
 	{
 		theIterator = new Iterator(150, colourTest, testCutOffs0);
 		assertEquals(new Color(230, 230, 50), theIterator.colourPicker(-0.07, 0.67, 0.184539, -0.383721));
@@ -41,11 +46,38 @@ public class IteratorWhiteBoxTest {
 		assertEquals(new Color(36, 159, 120), theIterator.colourPicker(-0.07, 0.67, 0.993165, -1.301095));
 
 	}
+	
+	/**
+	 * This tests that values of Z_0 that require a number of iterations to diverge
+	 * that is exactly equal to a cut-off will result in the correct colour being returned.
+	 * This tests the correct termination of the loop within the else-clause of the if-else 
+	 * statement in the colourPicker method
+	 */
+	@Test
+	public void cutOffTest2()
+	{
+		theIterator = new Iterator(150, colourTest, testCutOffs1);
+		assertEquals(colourTest[1], theIterator.colourPicker(0.08,-0.67, 1.0245, 1.0245));
+		assertEquals(colourTest[2], theIterator.colourPicker(0.08,-0.67, 0.9745, 0.9745));
+		assertEquals(colourTest[3], theIterator.colourPicker(0.08,-0.67, 0.9565, 0.9565));
+		assertEquals(colourTest[4], theIterator.colourPicker(0.08,-0.67, 0.9490, 0.9490));
+		assertEquals(colourTest[5], theIterator.colourPicker(0.08,-0.67, 0.9255, 0.9255));
+		assertEquals(colourTest[6], theIterator.colourPicker(0.08,-0.67, 0.9155, 0.9155));
+		assertEquals(colourTest[7], theIterator.colourPicker(0.08,-0.67, 0.0005, 0.0005));
+	  	assertEquals(colourTest[8], theIterator.colourPicker(0.08,-0.67, 0.1525, 0.1525));
+		assertEquals(colourTest[9], theIterator.colourPicker(0.08,-0.67, 0.1890, 0.1890));
+		assertEquals(colourTest[10], theIterator.colourPicker(0.08,-0.67, 0.3150, 0.3150));
+		assertEquals(colourTest[11], theIterator.colourPicker(0.08,-0.67, 0.6630, 0.6630));
+	}
 
 
 	/**
-	 * This tests the non entry of the while loop in the juliaIteration 
-	 * method due to the first loop control condition bring already false
+	 * This tests values close to the boundary for returning the first and second
+	 * colours in the colourTest array. In the first two statements the first colour is
+	 * returned because the value of Z_0 is already at a distance of 2 or more 
+	 * from the origin.
+	 * With the first cut-off set to 1 iteration, the values of 0 + 1.99i, 0 - 1.99i,
+	 * 1.99 + 0i and -1.99+0i cause the second colour to be returned.
 	 */
 	@Test
 	public void loopNonEntry()
@@ -63,8 +95,9 @@ public class IteratorWhiteBoxTest {
 	}
 	
 	/**
-	 * Tests that the boundary values for non divergent values of Z and C return correct colour
-	 * tests second loop condition in juliaIteration and if clause of the if-else statement in colourPicker
+	 * Tests that non divergent values of Z and C return correct colour (black)
+	 * This tests second loop condition in juliaIteration and if clause of the 
+	 * if-else statement in colourPicker
 	 */
 	@Test
 	public void nonDivergenceTest()
@@ -78,8 +111,9 @@ public class IteratorWhiteBoxTest {
 	}
 	
 	/**
-	 * Tests the second loop control condition and also tests the 
-	 * ability to have cut off array and colour array at different lengths
+	 * Tests the ability to have cut off array and colour array at different lengths 
+	 * When only two colours are given in the array of colours when the constructor is 
+	 * invoked then any values of z and c should return one of these two colours or black
 	 */
 	@Test
 	public void arrayLengthTest()
@@ -90,9 +124,17 @@ public class IteratorWhiteBoxTest {
 			assertTrue(theIterator.colourPicker(-0.07, 0.67, i, i).equals(colourTest[0]) || 
 					theIterator.colourPicker(-0.07, 0.67, i, i).equals(colourTest[1]) || 
 					theIterator.colourPicker(-0.07, 0.67, i, i).equals(new Color(0, 0, 0)));
-		}
-		
+			assertTrue(theIterator.colourPicker(-i, -i, i, i).equals(colourTest[0]) || 
+					theIterator.colourPicker(-i, -i, i, i).equals(colourTest[1]) || 
+					theIterator.colourPicker(-i, -i, i, i).equals(new Color(0, 0, 0)));
+		}	
 	}
+	/**
+	 * Tests that the constructor raises a run-time exception in all four situations
+	 * that it should: 9i0 if it is initialised with an empty colour array, initialised 
+	 * with an empty cut-offs array, or with unordered cut-offs or with the first cut-off
+	 * less than zero.
+	 */
 	
 	@Test(expected=RuntimeException.class)
 	public void emptyColoursArrayTest()

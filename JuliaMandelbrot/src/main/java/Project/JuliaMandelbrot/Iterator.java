@@ -1,7 +1,8 @@
 package Project.JuliaMandelbrot;
-
 import java.awt.Color;
 /**
+ * Performs the mathematica calculations necassary to determine 
+ * the colour of each pixel of a plot
  */
 public class Iterator {
 	int max;
@@ -15,9 +16,9 @@ public class Iterator {
 		max = maxIterations;
 		colours = newColours;
 		cutoffs = newCutoffs;
-		if(!validate(cutoffs, colours))
+		if(!validate(cutoffs, colours, max))
 		{
-			throw new RuntimeException("Cutoffs or colours invali  d");
+			throw new RuntimeException("Cutoffs or colours invalid");
 		}
 	}
 
@@ -28,7 +29,7 @@ public class Iterator {
 	 * @Param reC - real component of C
 	 * @Param imC - imaginary component of C
 	 * @Param reZ - real component of Z
-	 * @param imZ - imaginary component of Z
+	 * @Param imZ - imaginary component of Z
 	 * @Param maxIterations - number of iterations the method will stop iterating at
 	 */
 	public int juliaIteration(double reC, double imC, double reZ, double imZ, int maxIterations) {
@@ -66,13 +67,17 @@ public class Iterator {
 				i++;
 			}
 			currentColour = colours[i];
+			if (iterations >= cutoffs[i] && colours.length > i + 1)
+			{
+				currentColour = colours[i+1];
+			}
 		}
 		return currentColour;
 	}
 	
-	public boolean validate(int[] cutoffs, Color[] colours)
+	public boolean validate(int[] cutoffs, Color[] colours, int max)
 	{
-		if(colours.length == 0 || cutoffs.length == 0 || cutoffs[0] < 0 )
+		if(colours.length == 0 || cutoffs.length == 0 || cutoffs[0] < 1 || max < 25)
 		{
 			return false; 			 
 		}
@@ -83,8 +88,6 @@ public class Iterator {
 				return false; 
 			}
 		}
-		return true;
-		
+		return true;		
 	}
-
 }

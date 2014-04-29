@@ -74,7 +74,7 @@ class ApplicationJOrbit extends JFrame {
 			new Color(130, 50, 50), new Color(0, 160, 160), 
 			new Color(190, 160, 160), new Color(0, 255, 255), 
 			new Color(125, 220, 140), new Color(190,220,100),
-			new Color(230,230,50)};
+			new Color(230,230,50), new Color(255,255,255)};
 	private int[] juliaCutOffs = {2,3,4,5,7,9,11,14, 17, 25, 50, 58};
 	private final JTextField theRealInput = new JTextField(); 
 	private final JTextField theIminput = new JTextField();  
@@ -703,5 +703,4 @@ class ApplicationJOrbit extends JFrame {
 			repaint();
 		}
 	}
-	
 }

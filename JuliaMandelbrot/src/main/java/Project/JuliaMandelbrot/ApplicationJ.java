@@ -1,5 +1,4 @@
 package Project.JuliaMandelbrot;
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
@@ -340,7 +339,7 @@ class ApplicationJ extends JFrame {
 
 			if(index < 0) index = topIndex;
 		}
-
+   
 		public void run() {
 			while( true )
 			{
@@ -517,7 +516,7 @@ class ApplicationJ extends JFrame {
 		
 		@Override
 		public void paintComponent(Graphics g) {
-            super.paintComponents(g);
+            super.paintComponent(g);
             g.drawImage( theAI, 0,  0,  this);
       //      System.out.println("Paint component invoked");
             if(firstDisplay)

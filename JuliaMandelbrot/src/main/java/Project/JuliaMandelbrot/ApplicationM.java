@@ -1,16 +1,13 @@
 package Project.JuliaMandelbrot;
-import java.awt.AWTException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-//import java.util.Date;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -19,7 +16,6 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -30,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.io.File;
 import java.io.IOException;
+
 public class ApplicationM extends JFrame {
 	private static final int H = 720; // Height of window
 	private static final int W = 810; // Width of window
@@ -57,8 +54,8 @@ public class ApplicationM extends JFrame {
 	public int[] xPixelArray, yPixelArray; // hold x and y coordinates of pixels in animation path of values for C
 	public int topArrayIndex = 0;
 	private Color[] mandelbrotColours = {new Color(36, 59, 120), new Color(52, 90, 180), new Color(158, 27, 224), 
-			                             new Color(45, 27, 156), new Color(0, 180, 180),new Color(146, 255, 100)};
-    private int[] mandelbrotCutOffs = {1,7,13,19,30,33};  
+			                             new Color(45, 27, 156), new Color(0, 180, 180),new Color(146, 255, 100), new Color(255,255,255)};
+    private int[] mandelbrotCutOffs = {1,7,13,19,30,70};  
     private BufferedImage theAI, theAIToSave;
 	private Graphics2D theAG, theAGToSave;
 	private boolean animationRunning = false;
@@ -512,12 +509,13 @@ public class ApplicationM extends JFrame {
 		
 		@Override
 		public void paintComponent(Graphics g) {
-            super.paintComponents(g);
+            super.paintComponent(g);
             System.out.println("Paint component invoked");
             g.drawImage( theAI,  0,  0,  this);      
             if (animationRunning)
     		{
     			plotPoint((Graphics2D) g, xPixelArray[animationIndex], yPixelArray[animationIndex]);
+//    			displayC(xArray[animationIndex],yArray[animationIndex]);
     			g.drawString(outputC, 10, 20);
     		}
             if(zoomSelect && dragging)
@@ -530,5 +528,12 @@ public class ApplicationM extends JFrame {
 		{
 			repaint();		
 		}
+		
+/*		public void displayC(double reC, double imC)
+		{
+			 double re = Math.round(reC*1000000);
+			 double im = Math.round(imC*1000000);
+			 outputC = "C = " + String.valueOf(re/1000000) + " + " + String.valueOf(im/1000000) + "i";	 
+		}*/
     }
 }
