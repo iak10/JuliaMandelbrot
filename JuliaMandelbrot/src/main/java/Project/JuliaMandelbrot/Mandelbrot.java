@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 import java.io.File;
 import java.io.IOException;
 
-public class ApplicationM extends JFrame {
+public class Mandelbrot extends JFrame {
 	private static final int H = 720; // Height of window
 	private static final int W = 810; // Width of window
 	private Color previousColour = new Color(00, 00, 00);   // detects change of colour, so same colour is drawn as line
@@ -73,11 +73,11 @@ public class ApplicationM extends JFrame {
             new JLabel(String.valueOf((maxX + minX)/2)), new JLabel(String.valueOf(maxX))};  
 	private int xAxisGap = 8, yAxisGap = 8; // space between the axes (when visible) and the plotted image
 	boolean zoomSelect = false;
-	private ApplicationJ copyOfJulia;
+	private Julia copyOfJulia;
 	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	MyCanvas canvas = new MyCanvas();
 
-	public ApplicationM() {
+	public Mandelbrot() {
 		
 		setSize(W + xMargin + rightMargin, H + yMargin + topOffset ); // Size of drawing area plus margins
 		getContentPane().setBackground( backgroundColour );
@@ -239,7 +239,7 @@ public class ApplicationM extends JFrame {
 		
 	} // end of constructor method
 	
-	public void heresJulia(ApplicationJ julia)
+	public void heresJulia(Julia julia)
 	{
 		copyOfJulia = julia;
 	}

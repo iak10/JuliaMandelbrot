@@ -35,9 +35,9 @@ import javax.swing.JTextField;
 
 
 
-class ApplicationJOrbit extends JFrame {
-	ApplicationM mandelbrotCopy; // Global variable used to reference the JFrame holding the Mandelbrot image
-	ApplicationJ juliaCopy; // Global variable used to reference the JFrame holding the Julia animation
+class JuliaOrbit extends JFrame {
+	Mandelbrot mandelbrotCopy; // Global variable used to reference the JFrame holding the Mandelbrot image
+	Julia juliaCopy; // Global variable used to reference the JFrame holding the Julia animation
 	private static final int H = 301; // Height of window
 	private static final int W = 401; // Width of window
 	private Color previousColour = new Color(00, 00, 00);
@@ -111,7 +111,7 @@ class ApplicationJOrbit extends JFrame {
 	ArrayList<double[]> traceData = new ArrayList<double[]>();
 	MyJOCanvas canvas = new MyJOCanvas();
 
-	public ApplicationJOrbit(ApplicationM mandelbrot, ApplicationJ julia) {
+	public JuliaOrbit(Mandelbrot mandelbrot, Julia julia) {
 		
 		mandelbrotCopy = mandelbrot;	
 		juliaCopy = julia;

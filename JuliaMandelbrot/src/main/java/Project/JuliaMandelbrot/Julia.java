@@ -27,8 +27,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-class ApplicationJ extends JFrame {
-	ApplicationM mandelbrotCopy; // Global variable used to reference the JFrame holding the Mandelbrot image
+class Julia extends JFrame {
+	Mandelbrot mandelbrotCopy; // Global variable used to reference the JFrame holding the Mandelbrot image
 	double[] xArray; // Array holding x (real) components of animation values of c
 	double[] yArray; // Array holding y (imaginary) components of animation values of c
 	int topIndex; // top index of arrays xArray and yArray
@@ -103,7 +103,7 @@ class ApplicationJ extends JFrame {
 	MyJCanvas canvas = new MyJCanvas();
 
 
-	public ApplicationJ(ApplicationM mandelbrot) {
+	public Julia(Mandelbrot mandelbrot) {
 
 		mandelbrotCopy = mandelbrot;		
 		setLocation(930, 580);
