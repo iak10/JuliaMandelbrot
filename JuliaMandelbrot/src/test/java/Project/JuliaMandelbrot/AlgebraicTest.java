@@ -11,7 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-/* 
+/**
  * This tests the Iterator class, whose constructor requires the input of 
  * three valid parameters: (i) a valid integer ( > 25) for the maximum number 
  * of iterations, after which it will be assumed that a point does not diverge.
@@ -54,7 +54,7 @@ public class AlgebraicTest {
 	private int[] testCutOffs4 = {2, 4, 6, 12};  
 	private Color black = new Color(0, 0, 0);
 
-	/*
+	/**
 	 * Exceptiontest1 checks that an exception is raised when the sequence of cut-offs
 	 * provided to the constructor of Iterator is not valid, either because the 
 	 * first element is less than 1 or because the array elements are not  
@@ -102,7 +102,7 @@ public class AlgebraicTest {
 
 	}
 
-	/*
+	/**
 	 * Exceptiontest2 ensures that the first instance of the array of cutoffs is >=1,
 	 * and checks that an exception is raised when the next two cut offs are not 
 	 * strictly increasing. The else-clause checks that when the cut-offs are 
@@ -136,7 +136,7 @@ public class AlgebraicTest {
 		}		
 	}
 
-	/*
+	/**
 	 * Exceptiontest3 ensures that a valid array of colours and a valid array
 	 * of cutoffs are provided to the constructor method of Iterator, which should
 	 * raise an exception or not according to whether the values of a, which is given
@@ -167,7 +167,7 @@ public class AlgebraicTest {
 		}		
 	}
 
-	/*
+	/**
 	 * Exceptiontest4 ensures that a valid number for maximum iterations and a valid
 	 * array of of cutoffs are provided to the constructor method of Iterator, but 
 	 * the length of the array of colours may be zero, and if so an exception should 
@@ -199,7 +199,7 @@ public class AlgebraicTest {
 		}		
 	}
 
-	/*
+	/**
 	 * Exceptiontest5 provides the constructor of Iterator with an arbitray array
 	 * array of integers for the cut-offs. 
 	 * All possibilities for the array being valid or not are tested, and whether
@@ -257,7 +257,7 @@ public class AlgebraicTest {
 			System.out.println("Random array was valid");
 		}
 	}
-	/*
+	/**
 	 * This tests that when the pre-conditions of the constructor of class Iterator
 	 * are fulfilled by providing an array of colours, and a value > 25 for the maximum
 	 * number of iterations, and an ascending sequence of positive integers in the
@@ -277,7 +277,7 @@ public class AlgebraicTest {
 
 	}
 
-	/*
+	/**
 	 * When the first cutoff in the array of cut-offs is 1, the first colour 
 	 * in the colour array should be returned if and only if the initial value 
 	 * of c is at a distance of 2 or more form the origin.
@@ -296,7 +296,7 @@ public class AlgebraicTest {
 		}			
 	}
 
-	/*
+	/**
 	 * The same as range2Test but with a wider range allowed 
 	 * of initial values for C.  When the first cutoff in the 
 	 * array of cut-offs is 1, the first colour in the 
@@ -317,7 +317,7 @@ public class AlgebraicTest {
 		}			
 	}
 
-	/* 
+	/** 
 	 * This tests that the instance of Iterator gives the expected results for the 
 	 * intersection of the Real line with the Mandelbrot set. This intersection is
 	 * the closed interval [-2, 0.25]. With z initially 0 and Im(C) = 0, the Iterator
@@ -339,7 +339,7 @@ public class AlgebraicTest {
 		}	
 	}
 
-	/* 
+	/** 
 	 * This tests that when the value of zero is given to the instance of Iterator
 	 * as the real and imaginary component of C, then it will return black (for non-
 	 * divergence) if it is given a value of z that is a distance of 1 or less 
@@ -361,7 +361,7 @@ public class AlgebraicTest {
 		}	
 	}
 
-	/* 
+	/** 
 	 * This tests that only the expected colours are returned by the Iterator
 	 * instance. It can return any of the four colours in the array of colours
 	 * created
@@ -377,7 +377,7 @@ public class AlgebraicTest {
 				|| returnColour.equals(colours[2]) ||returnColour.equals(colours[3]) || returnColour.equals(black));
 	}
 
-	/* 
+	/** 
 	 * This tests that only the expected colours are returned by the Iterator
 	 * instance. When it is given two cut offs it can only return the first three 
 	 * colours, even though there are six colours in the array
@@ -393,7 +393,7 @@ public class AlgebraicTest {
 				|| returnColour.equals(colours[2]) || returnColour.equals(black));
 	}
 
-	/* The purpose of this test is to check that the instance of Iterator
+	/** The purpose of this test is to check that the instance of Iterator
 	 * is returning the correct colour for a range of numbers specifying
 	 * the real and imaginary components of c and of the initial value of z.
 	 * The initial values are between -1 and 1 to provide good coverage for
@@ -440,7 +440,7 @@ public class AlgebraicTest {
 
 	}
 
-	/* 
+	/** 
 	 * The purpose of this method is to iterate a complex number z
 	 * to the next point, which is z^2 + c
 	 */
@@ -452,7 +452,7 @@ public class AlgebraicTest {
 		return array;	// return the new point	
 	}
 
-	/* 
+	/** 
 	 * The purpose of this method is to generate an array of colours
 	 * whose red, blue and green components are generated as random
 	 * numbers between 0 and 255

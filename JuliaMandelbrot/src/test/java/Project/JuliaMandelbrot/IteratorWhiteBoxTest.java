@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import java.awt.Color;
 
 import org.junit.Test;
-/*
+/**
  * The white box test of th eIterator class aims to test all lines of code in the class
  * and all combinations of tru and false for the boolean conditions and complex conditions.
  */
@@ -110,7 +110,7 @@ public class IteratorWhiteBoxTest {
 	 * from the origin.
 	 */
 	@Test
-	public void loopNonEntry() // TEST 3A
+	public void loopNonEntryTest3A() // TEST 3A
 	{
 		theIterator = new Iterator(150, colourTest, testCutOffs1);
 		assertEquals(new Color(36, 159, 120), theIterator.colourPicker(-0.07, 0.67, 2.001, 0));
@@ -124,7 +124,7 @@ public class IteratorWhiteBoxTest {
 	 * returned because the value of Z_0 is not already at a distance of 2 or more 
 	 * from the origin, so the loop is entered.
 	 */	
-	public void loopEntry() // TEST 3B
+	public void loopEntryTest3B() // TEST 3B
 	{
 		theIterator = new Iterator(150, colourTest, testCutOffs1);
 		assertEquals(new Color(0,50,150), theIterator.colourPicker(-0.07, 0.67, 2, 0));
@@ -140,7 +140,7 @@ public class IteratorWhiteBoxTest {
 	 * first if-condition in colourPicker is true.
 	 */
 	@Test
-	public void nonDivergenceTest() // TEST 4
+	public void nonDivergenceTest4() // TEST 4
 	{
 		theIterator = new Iterator(150, colourTest, testCutOffs0);
 		assertEquals(new Color(0, 0, 0), theIterator.colourPicker(0, 0, 0, 0));
@@ -157,7 +157,7 @@ public class IteratorWhiteBoxTest {
 	 * This tests correct execution of statement iMax := Math.min(colours.length, cutoffs.length)
 	 */
 	@Test
-	public void arrayLengthTest() // TEST 5
+	public void arrayLengthTest5() // TEST 5
 	{
 		theIterator = new Iterator(150, colourTest, testCutOffs2);
 		for(double i = -2.2; i <= 2.2; i += 0.1)
@@ -171,28 +171,27 @@ public class IteratorWhiteBoxTest {
 		}	
 	}
 	/**
-	 * Tests that the constructor raises a run-time exception in all situations
-	 * that it should: (i) if it is initialised with an empty colour array, initialised 
+	 * The following (6 to 11) test that the constructor raises a run-time exception in all 
+	 * situations that it should: (i) if it is initialised with an empty colour array, initialised 
 	 * with an empty cut-offs array, or with both arrays empty or with unordered 
 	 * cut-offs or with the first cut-off less than zero, or with a value < 25 for
 	 * the maximum number of iterations. 
 	 */
-	
 	@Test(expected=RuntimeException.class)
-	public void emptyColoursArrayTest()  // TEST 6
+	public void emptyColoursArrayTest6()  // TEST 6
 	{
 		Color[] emptyColours = {};
 		theIterator = new Iterator(150, emptyColours, testCutOffs0);
 	}
 	
 	@Test(expected=RuntimeException.class)
-	public void emptyCutoffArrayTest() // TEST 7
+	public void emptyCutoffArrayTest7() // TEST 7
 	{
 		int[] emptyCutOffs = {};
 		theIterator = new Iterator(150, colourTest, emptyCutOffs);
 	}
 	@Test(expected=RuntimeException.class)
-	public void emptyBothTest()   // TEST 8
+	public void emptyBothTest8()   // TEST 8
 	{
 		Color[] emptyColours = {};
 		int[] emptyCutOffs = {};
@@ -200,26 +199,29 @@ public class IteratorWhiteBoxTest {
 	}
 	
 	@Test(expected=RuntimeException.class) 
-	public void negativeCutoffTest()  // TEST 9
+	public void negativeCutoffTest9()  // TEST 9
 	{
 		int[] invalidCutoffs = {-1, 2, 3, 4}; 
 		theIterator = new Iterator(150, colourTest, invalidCutoffs);
 	}
 	
-	@Test(expected=RuntimeException.class) // TEST 10
-	public void unorderedCutoffTest()
+	@Test(expected=RuntimeException.class) 
+	public void unorderedCutoffTest10() // TEST 10
 	{
 		int[] invalidCutoffs = {1, 2, 4, 3}; 
 		theIterator = new Iterator(150, colourTest, invalidCutoffs);
 	}
-	@Test(expected=RuntimeException.class)  // TEST 11
-	public void loMaxIterations()
+	@Test(expected=RuntimeException.class)  
+	public void loMaxIterationsTest11()  // TEST 11
 	{
 		theIterator = new Iterator(24, colourTest, testCutOffs0);
 	}
-	
-	@Test // TEST 12
-	public void doubleFalse1()
+	/**
+	 * The next two tests were added to ensure all combinations of boolean complex
+	 * conditions are tested. Please refer to the docuemnt on branch coverage
+	 */
+	@Test 
+	public void doubleFalse1Test12() // TEST 12
 	{
 		theIterator = new Iterator(59, colourTest, testCutOffs0);
 		double reC = -0.0722;
@@ -227,8 +229,8 @@ public class IteratorWhiteBoxTest {
 		assertEquals(Color.black, theIterator.colourPicker(reC, imC, 0.094, 0.654));
 	}
 	
-	@Test // TEST 13
-	public void doubleFalse2()
+	@Test 
+	public void doubleFalse2Test13() // TEST 13
 	{ 
 		final Color[] shortColours =  {new Color(36, 159, 120), new Color(0,50,150), new Color(36, 159, 120),
 				new Color(80, 180, 80), new Color(140, 50, 180)}; 

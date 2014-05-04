@@ -1,6 +1,6 @@
 package Project.JuliaMandelbrot;
 import java.awt.Color;
-/*
+/**
  * This class is intialised by its constructor with a list of colours and cutOffs,
  * provided in an array of base type Colour and an array of base type int. The array of
  * base type int must hold a list of strictly increasing positive numbers. constructor 
@@ -81,7 +81,7 @@ public class Iterator {
 		}
 		return currentColour;
 	}
-	/*
+	/**
 	 * This method is invoked by the constructor, in order to validate the input
 	 * provided to the constructor
 	 */
