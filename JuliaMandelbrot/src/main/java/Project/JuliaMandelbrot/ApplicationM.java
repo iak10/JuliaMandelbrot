@@ -1,4 +1,5 @@
 package Project.JuliaMandelbrot;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
@@ -45,7 +46,7 @@ public class ApplicationM extends JFrame {
 	private double maxY = maxYDefault; // initialise maximum x to default value
 	private int maxIterations = 150; // maximum iterations for each complex number, if it hasn't diverged it is assumed it won't
 	private int xMargin = 70; // gap between the left side of JFrame and the plotted image
-	private int yMargin = 60; // gap between lower edge of plotted image and botto of the JFrame
+	private int yMargin = 60; // gap between lower edge of plotted image and bottom of the JFrame
 	private int topOffset = 150; // gap between top of JFrame and the plotted image
 	private int rightMargin = 30; // gap between right edge of plotted image and the edge of the JFrame
   	private final JTextField theRealOutput = new JTextField(); // text field for real component of C clocked on
@@ -98,7 +99,7 @@ public class ApplicationM extends JFrame {
 		 JLabel label1 = new JLabel("Click to set C =");
 		 JLabel label2 = new JLabel(" + ");
 		 JLabel label3 = new JLabel("i");
-		 JLabel label4 = new JLabel("Drag mouse with button down to set path for the Julia set animation");
+		 JLabel label4 = new JLabel("Mouse drag on Mandelbrot set to lay a  path for the Julia set animation, then click Start button on the Julia animation");
 
 		 label1.setBounds(75,60,150,30);
 		 label1.setFont(new Font("ARIAL", Font.PLAIN, 16));
@@ -112,8 +113,8 @@ public class ApplicationM extends JFrame {
 		 label3.setFont(new Font("Serif", Font.ITALIC, 20));
 		 cp.add(label3);
 		 
-		 label4.setBounds(75,20,700,30);
-		 label4.setFont(new Font("ARIAL", Font.PLAIN, 18));
+		 label4.setBounds(75,20,800,30);
+		 label4.setFont(new Font("ARIAL", Font.PLAIN, 16));
 		 cp.add(label4);
 		 
 		// canvas.setLocation(new Point(xMargin, topOffset));
@@ -295,7 +296,7 @@ public class ApplicationM extends JFrame {
 				{
 					g.draw(new Line2D.Double(firstChangex , yPixel , xPixel , yPixel ));
 					firstChangex = xPixel % (W - 1);
-					g.setPaint(currentColour);
+					g.setPaint(currentColour); 
 				}				
 			}
 		}
@@ -510,7 +511,6 @@ public class ApplicationM extends JFrame {
 		@Override
 		public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            System.out.println("Paint component invoked");
             g.drawImage( theAI,  0,  0,  this);      
             if (animationRunning)
     		{

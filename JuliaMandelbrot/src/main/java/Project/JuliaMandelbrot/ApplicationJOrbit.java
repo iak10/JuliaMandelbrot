@@ -703,4 +703,5 @@ class ApplicationJOrbit extends JFrame {
 			repaint();
 		}
 	}
+	
 }

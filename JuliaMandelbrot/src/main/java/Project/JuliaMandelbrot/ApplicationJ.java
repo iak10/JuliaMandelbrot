@@ -1,7 +1,6 @@
 package Project.JuliaMandelbrot;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -339,7 +338,7 @@ class ApplicationJ extends JFrame {
 
 			if(index < 0) index = topIndex;
 		}
-   
+  
 		public void run() {
 			while( true )
 			{
@@ -518,7 +517,6 @@ class ApplicationJ extends JFrame {
 		public void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.drawImage( theAI, 0,  0,  this);
-      //      System.out.println("Paint component invoked");
             if(firstDisplay)
     		{
     			((Graphics2D) g).setPaint(Color.BLACK);

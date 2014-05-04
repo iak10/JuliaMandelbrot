@@ -25,11 +25,18 @@ import org.junit.runner.RunWith;
  * not to provide good coverage for valid cases, so the fourth test (testIteratorReturned)
  * was written to ensure the valid case was covered, but with a wide range of 
  * possibilities.
+ * The fifth test used an array in integer as the parameter provided by JCheck
+ * and all possibilities for the array being valid or not are tested, and whether
+ * an exception is raised or a valid instance of Iterator returned.
  * The other issue I encountered was that when I came to test that the correct 
  * colour was always returned I found I was inevitably using similar logic in the 
  * test as in the iterator class itself. I was at pains to minimise this by
  * using a different approach in comparing the colour returned and the iterations,
  * but here is inevitable some circularity in automatic testing. 
+ * There are other tests included that are used to verify that the expected results are 
+ * given in well known cases, for example where C is a real number that is part of the 
+ * Mandelbrot set if it lies in [-2, 0.25].
+ * A method is provided that has been used to generate an array of arbitrary colours.
  */
 
 @RunWith(org.jcheck.runners.JCheckRunner.class)
@@ -94,12 +101,12 @@ public class AlgebraicTest {
 		}
 
 	}
-	
+
 	/*
 	 * Exceptiontest2 ensures that the first instance of the array of cutoffs is >=1,
 	 * and checks that an exception is raised when the next two cut offs are not 
 	 * strictly increasing. The else-clause checks that when the cut-offs are 
-	 * valid an instance of Iterator is returned.A valid array of colours is provided
+	 * valid an instance of Iterator is returned. A valid array of colours is provided
 	 * to the constructor of Iterator, as well as a valid number (150) for the maximum
 	 * iterations.
 	 */
@@ -128,7 +135,7 @@ public class AlgebraicTest {
 			assertTrue(theIterator.getClass().getSimpleName().equals("Iterator"));	
 		}		
 	}
-	
+
 	/*
 	 * Exceptiontest3 ensures that a valid array of colours and a valid array
 	 * of cutoffs are provided to the constructor method of Iterator, which should
@@ -191,7 +198,65 @@ public class AlgebraicTest {
 			assertTrue(theIterator.getClass().getSimpleName().equals("Iterator"));	
 		}		
 	}
-	
+
+	/*
+	 * Exceptiontest5 provides the constructor of Iterator with an arbitray array
+	 * array of integers for the cut-offs. 
+	 * All possibilities for the array being valid or not are tested, and whether
+	 * an exception is raised or a valid instance of Iterator returned.
+	 */
+	@Configuration(tests=200, size=100)
+	@Test
+	public void exceptionTest5(int[] intArray)
+	{
+		boolean exceptionRaised = false;
+		Color[] colours = colourArray(20);
+		if (intArray.length == 0)
+		{
+			try {
+				theIterator = new Iterator(100, colours, intArray);
+				fail( "My method didn't throw when I expected it to" );
+			} 
+			catch (RuntimeException expectedException) 
+			{
+				exceptionRaised = true;
+			}
+			assertTrue(exceptionRaised);
+
+		}else if (intArray[0] < 1)
+		{	
+			try {
+				theIterator = new Iterator(100, colours, intArray);
+				fail( "My method didn't throw when I expected it to" );
+			} 
+			catch (RuntimeException expectedException) 
+			{
+				exceptionRaised = true;
+			}
+			assertTrue(exceptionRaised);
+		}	
+		else 
+			for (int i = 0; i < intArray.length - 1; i++)
+			{
+				if (intArray[i+1] <= intArray[i])
+				{
+					try {
+						theIterator = new Iterator(100, colours, intArray);
+						fail( "My method didn't throw when I expected it to" );
+					} 
+					catch (RuntimeException expectedException) 
+					{
+						exceptionRaised = true;
+					}
+				}
+			}
+		if (!exceptionRaised)
+		{
+			theIterator = new Iterator(100, colours, intArray);
+			assertTrue(theIterator.getClass().getSimpleName().equals("Iterator"));	
+			System.out.println("Random array was valid");
+		}
+	}
 	/*
 	 * This tests that when the pre-conditions of the constructor of class Iterator
 	 * are fulfilled by providing an array of colours, and a value > 25 for the maximum
@@ -230,7 +295,7 @@ public class AlgebraicTest {
 			assertFalse(theIterator.colourPicker(reC, imC, i, j).equals(colourTest[0]));
 		}			
 	}
-	
+
 	/*
 	 * The same as range2Test but with a wider range allowed 
 	 * of initial values for C.  When the first cutoff in the 
@@ -273,7 +338,7 @@ public class AlgebraicTest {
 			assertFalse(theIterator.colourPicker(reC, 0, 0, 0).equals(new Color(0, 0, 0)));
 		}	
 	}
-	
+
 	/* 
 	 * This tests that when the value of zero is given to the instance of Iterator
 	 * as the real and imaginary component of C, then it will return black (for non-
@@ -311,7 +376,7 @@ public class AlgebraicTest {
 		assertTrue(returnColour.equals(colours[0]) || returnColour.equals(colours[1]) 
 				|| returnColour.equals(colours[2]) ||returnColour.equals(colours[3]) || returnColour.equals(black));
 	}
-	
+
 	/* 
 	 * This tests that only the expected colours are returned by the Iterator
 	 * instance. When it is given two cut offs it can only return the first three 
@@ -374,7 +439,7 @@ public class AlgebraicTest {
 		}
 
 	}
-	
+
 	/* 
 	 * The purpose of this method is to iterate a complex number z
 	 * to the next point, which is z^2 + c
@@ -386,7 +451,7 @@ public class AlgebraicTest {
 		array[1] =(2*a*b) + y;        // imaginary part of next iterate
 		return array;	// return the new point	
 	}
-	
+
 	/* 
 	 * The purpose of this method is to generate an array of colours
 	 * whose red, blue and green components are generated as random
